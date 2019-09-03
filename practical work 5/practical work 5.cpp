@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <ctime>
 #include <vector>
 
@@ -11,34 +11,32 @@ vector<int> gnomeSort(vector<int> sequence) {
 			sequence[i] = sequence[i + 1]; 
 			sequence[i + 1] = temp;
 
-			if (i != 0) {
-				i -= 2;
-			}
+			if (i != 0) i -= 2;
 		}
 	}
 	return sequence;
 }
 
-vector<int> quickSort(vector<int> sequence) {
-	int mid, count;
-	int first = 0, last = sequence.size() - 1;
-	int f = first, l = last;
-	mid = sequence[(f + l) / 2]; //вычисление опорного элемента
-	do
-	{
-		while (sequence[f] < mid) f++;
-		while (sequence[l] > mid) l--;
-		if (f <= l) //перестановка элементов
-		{
-			count = sequence[f];
-			sequence[f] = sequence[l];
-			sequence[l] = count;
-			f++;
-			l--;
+vector<int> quickSort(vector<int> sequence, int low, int high) {
+	int i = low;
+	int j = high;
+	int x = sequence[(low + high) / 2];
+
+	do {
+		while (sequence[i] < x) ++i;
+		while (sequence[j] > x) --j;
+
+		if (i <= j) {
+			int temp = sequence[i];
+			sequence[i] = sequence[i + 1];
+			sequence[i + 1] = temp;
+			i++; 
+			j--;
 		}
-	} while (f < l);
-	if (first < l) quickSort(sequence);
-	if (f < last) quickSort(sequence);
+	} while (i < j);
+
+	if (low < j) quickSort(sequence, low, j);
+	if (i < high) quickSort(sequence, i, high);
 
 	return sequence;
 }
@@ -52,9 +50,7 @@ int main() {
 	cout << "Введите количество элементов: ";
 	cin >> n;
 
-	for (int i = 0; i < n; i++) {
-		sequence.push_back(rand());
-	}
+	for (int i = 0; i < n; i++) sequence.push_back(rand());
 
 	for (int& i : sequence) cout << i << " ";
 
@@ -63,16 +59,16 @@ int main() {
 	cout << endl << endl;
 
 	startTime = time(NULL);
-	sequence = gnomeSort(sequence);
+	vector<int> newSequence = gnomeSort(sequence);
 	finishTime = time(NULL);
-	for (int& i : sequence) cout << i << " ";
-	cout << endl << "Время гномьей сортировки: " << difftime(finishTime, startTime);
+	for (int& i : newSequence) cout << i << " ";
+	cout << endl << "Время гномьей сортировки: " << difftime(finishTime, startTime) << endl;
 
 	startTime = time(NULL);
-	sequence = quickSort(sequence);
+	vector<int> newSecSequence = quickSort(sequence, 0, sequence.size());
 	finishTime = time(NULL);
-	for (int& i : sequence) cout << i << " ";
-	cout << endl << "Время гномьей сортировки: " << difftime(finishTime, startTime);
+	for (int& i : newSecSequence) cout << i << " ";
+	cout << endl << "Время быстрой сортировки: " << difftime(finishTime, startTime) << endl;
 
 
 	return 0;
