@@ -1,11 +1,9 @@
-﻿#include <iostream>
+#include <iostream>
 #include <clocale>
 #include <ctime>
 #include <vector>
 
 using namespace std;
-
-typedef void (*func) (vector<int>);
 
 void fastSolution(vector<int> sequence) {
 	bool first;
@@ -60,7 +58,7 @@ int main() {
 	for (int i = 0; i < n; i++) {
 		sequence.push_back(rand());
 	}
-	for (int& i : sequence) cout << i << " ";
+	// for (int& i : sequence) cout << i << " ";
 
 	startTime = time(NULL);
 	fastSolution(sequence);
