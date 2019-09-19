@@ -2,30 +2,19 @@
 #include <clocale>
 #include <ctime>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
-void fastSolution(vector<int> sequence, int n) {
-	int* buffer = new int[sequence.size()];
-	for (int i = 0; i < sequence.size(); i++) {
-		buffer[i] = 0;
+void fastSolution(vector<int> sequence, int k) {
+	
+	sort(sequence.rbegin(), sequence.rend());
+
+	cout << endl << k << "-максимальных членов последовательности: ";
+	for (int i = 0; i < k; i++) {
+		cout << " " << sequence[i];
 	}
-
-	for (int i = 0; i < sequence.size(); i++) {
-		int n = sequence[i];
-		buffer[n]++;
-	}
-
-	cout << "Максимальные элементы последовательности: ";
-	for (int i = sequence.size(); i >= sequence.size() - n; i--) {
-		int n = buffer[i];
-
-		while (n > 0) {
-			cout << " " << i;
-			n--;
-		}
-	}
-
+	cout << endl;
 }
 
 void slowSolution(vector<int> sequence) {
@@ -49,9 +38,11 @@ int main() {
 
 	time_t startTime, finishTime;
 
-	int n;
+	int n, k;
 	cout << "Введите количество элементов: ";
 	cin >> n;
+	cout << "Введите количество максимальных элементов: ";
+	cin >> k;
 
 	vector<int> sequence;
 	for (int i = 0; i < n; i++) {
@@ -60,7 +51,7 @@ int main() {
 	for (int& i : sequence) cout << i << " ";
 
 	startTime = time(NULL);
-	fastSolution(sequence, n);
+	fastSolution(sequence, k);
 	finishTime = time(NULL);
 	cout << "Время выполнения быстрой программы: " << difftime(finishTime, startTime);
 
