@@ -98,25 +98,26 @@ int main() {
 
 	cout << endl << endl;
 
-	/*startTime = time(NULL);
+	startTime = time(NULL);
 	vector<int> newSequence = gnomeSort(sequence);
 	finishTime = time(NULL);
-	cout << "Результат гномьей сортировки: " << endl;
-	for (int& i : newSequence) cout << i << " ";
+	/*cout << "Результат гномьей сортировки: " << endl;
+	for (int& i : newSequence) cout << i << " ";*/
 	cout << endl << "Время гномьей сортировки: " << difftime(finishTime, startTime)/1000. << endl;
+
 	startTime = time(NULL);
 	quickSort(sequence, 0, sequence.size() - 1);
 	finishTime = time(NULL);
-	cout << "Результат быстрой сортировки: " << endl;
-	for (int& i : sequence) cout << i << " ";
-	cout << endl << "Время быстрой сортировки: " << difftime(finishTime, startTime)/1000. << endl;*/
+	/*cout << "Результат быстрой сортировки: " << endl;
+	for (int& i : sequence) cout << i << " ";*/
+	cout << endl << "Время быстрой сортировки: " << difftime(finishTime, startTime)/1000. << endl;
 
-	startTime = time(NULL);
+	/*startTime = time(NULL);
 	heapSort(sequence);
 	finishTime = time(NULL);
 	cout << "Результат сортировки кучей: " << endl;
 	for (int& i : sequence) cout << i << " ";
-	cout << endl << "Время сортировки кучей: " << difftime(finishTime, startTime) / 1000. << endl;
+	cout << endl << "Время сортировки кучей: " << difftime(finishTime, startTime) / 1000. << endl;*/
 
 	return 0;
 }
