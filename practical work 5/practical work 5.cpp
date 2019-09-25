@@ -41,7 +41,7 @@ void quickSort(vector<int> & sequence, int low, int high) {
 // Функция "просеивания" через кучу - формирование кучи
 void siftDown(vector<int>& sequence, int root, int bottom) {
 	int maxChild; // индекс максимального потомка
-	int done = 0; // флаг того, что куча сформирована
+	bool done = false; // флаг того, что куча сформирована
 
 	// Пока не дошли до последнего ряда
 	while (root * 2 <= bottom && !done) {
@@ -63,7 +63,7 @@ void siftDown(vector<int>& sequence, int root, int bottom) {
 			root = maxChild;
 		}
 		else // иначе
-			done = 1; // пирамида сформирована
+			done = true; // пирамида сформирована
 	}
 }
 
