@@ -24,13 +24,13 @@ int main() {
 		sequence.push_back(arr[i]);
 	}
 
+	cout << "Текущая последовательность: ";
+	for (int i : sequence) cout << i << " ";\
+
 	auto iter = sequence.cbegin();
 	for (int i = 0; i < sequence.size() / 2; i++) {
 		iter++;
 	}
-
-	cout << "Текущая последовательность: ";
-	for (int i : sequence) cout << i << " ";
 
 	int middleIndexElement = *iter;
 	cout << endl << "Срединный элемент = " << middleIndexElement << endl;
