@@ -7,6 +7,7 @@
 #pragma warning(disable : 4996)
 
 using namespace std;
+
 void simpleMergingSort(const char* name) {
 	int a1, a2, k, i, j, kol, tmp;
 	FILE *f, *f1, *f2;
@@ -88,35 +89,34 @@ void simpleMergingSort(const char* name) {
 	remove("smsort_2");
 }
 
-void simpleMergingSort2(const char* name) {
-	int a1, a2, k, i, j, kol, tmp;
-	fstream f, f1, f2;
-	FILE* f, * f1, * f2;
-	kol = 0;
-	if (!f.is_open()) {
+void simpleMergingSort2(const char* fileName) {
+	int a1, a2, k = 1, quantity = 0;
+	fstream f(fileName, ios::in);
+
+	if (!f.is_open())
 		printf("Исходный файл не может быть прочитан...");
-	}
 	else {
 		while (!f.eof()) {
 			f >> a1;
-			kol++;
+			quantity++;
 		}
 		f.close();
 	}
-	k = 1;
-	while (k < kol) {
-		f.open(name);
-		f1.open("smsort_1.txt");
-		f2.open("smsort_2.txt");
+
+	while (k < quantity) {
+		f.open(fileName, ios::in);
+		fstream f1("smsort_1.txt", ios::out);
+		fstream f2("smsort_2.txt", ios::out);
+
 		if (!f.eof()) f >> a1;
 
 		while (!f.eof()) {
-			for (i = 0; i < k && !f.eof(); i++) {
+			for (int i = 0; i < k && !f.eof(); i++) {
 				f1 << a1;
 				f >> a1;
 			}
-			for (j = 0; j < k && !f.eof(); j++) {
-				f2 << a1;
+			for (int j = 0; j < k && !f.eof(); j++) {
+				f1 << a2;
 				f >> a1;
 			}
 		}
@@ -124,14 +124,15 @@ void simpleMergingSort2(const char* name) {
 		f1.close();
 		f.close();
 
-		f.open(name);
-		f1.open("smsort_1.txt");
-		f2.open("smsort_2.txt");
+		f.open(fileName, ios::out);
+		f1.open("smsort_1.txt", ios::in);
+		f2.open("smsort_2.txt", ios::in);
+		
 		if (!f1.eof()) f1 >> a1;
 		if (!f2.eof()) f2 >> a2;
+
 		while (!f1.eof() && !f2.eof()) {
-			i = 0;
-			j = 0;
+			int i = 0, j = 0;
 			while (i < k && j < k && !f1.eof() && !f2.eof()) {
 				if (a1 < a2) {
 					f << a1;
@@ -161,22 +162,21 @@ void simpleMergingSort2(const char* name) {
 		}
 		while (!f2.eof()) {
 			f << a2;
-			f >> a2;
+			f2 >> a2;
 		}
 		f2.close();
 		f1.close();
 		f.close();
 		k *= 2;
 	}
+	cout << "Сортировка прошла успешно! Проверьте исходных файл!" << endl;
 }
 
 
 int main() {
 	setlocale(LC_ALL, "");
 
-	simpleMergingSort2("input.txt");
-
-	cout << "Сортировка прошла успешно! Проверьте исходных файл!" << endl;
+	simpleMergingSort("input.txt");
 
 	return 0;
 }
