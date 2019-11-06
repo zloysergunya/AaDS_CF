@@ -116,7 +116,7 @@ void simpleMergingSort2(const char* fileName) {
 				f >> a1;
 			}
 			for (int j = 0; j < k && !f.eof(); j++) {
-				f1 << a2;
+				f1 << a1;
 				f >> a1;
 			}
 		}
